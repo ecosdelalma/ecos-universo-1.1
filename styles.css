@@ -1,54 +1,37 @@
 
-body, html {
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
+  box-sizing: border-box;
 }
-
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
 #bg-video {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  right: 0;
+  bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
   z-index: -1;
-  transform: translate(-50%, -50%);
+  object-fit: cover;
 }
-
-.overlay {
-  position: absolute;
-  bottom: 15%;
-  width: 100%;
-  text-align: center;
+.content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.overlay button {
+#be-ecos {
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   padding: 12px 30px;
-  border-radius: 30px;
-  font-size: 1.2rem;
+  font-size: 18px;
   cursor: pointer;
-}
-
-#form-container {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-radius: 20px;
-  display: none;
-}
-
-#form-container input,
-#form-container button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
 }
