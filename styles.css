@@ -1,37 +1,37 @@
 
-* {
+body, html {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-html, body {
   height: 100%;
-  width: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
 }
-#bg-video {
+
+.video-container {
   position: fixed;
-  right: 0;
-  bottom: 0;
+  top: 0;
+  left: 0;
   min-width: 100%;
   min-height: 100%;
-  z-index: -1;
   object-fit: cover;
+  z-index: -1;
 }
-.content {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#be-ecos {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 2px solid white;
+
+.start-button {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 12px 30px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 30px;
-  backdrop-filter: blur(10px);
+  font-size: 1.2rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.start-button:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
