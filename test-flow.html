@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Flujo - Ecos</title>
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#a2c1ff',
+                        'primary-lavender': '#c5b8f0',
+                        'soft-gray': '#f8fafc',
+                        'medium-gray': '#e2e8f0',
+                        'dark-gray': '#64748b',
+                        'text-primary': '#1e293b',
+                        'text-secondary': '#64748b'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'Poppins', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white min-h-screen font-sans">
+    <div class="max-w-4xl mx-auto py-12 px-6">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-display font-bold text-text-primary mb-4">
+                Ecos - Test de Flujo Completo
+            </h1>
+            <p class="text-text-secondary text-lg">
+                Pruebas automáticas para verificar que todo funciona correctamente
+            </p>
+        </div>
+
+        <!-- Test Status -->
+        <div class="bg-soft-gray rounded-2xl p-8 border border-medium-gray mb-8">
+            <h2 class="text-2xl font-display font-semibold text-text-primary mb-6">Estado de Pruebas</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="flex items-center space-x-3">
+                    <div id="connection-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">Conexión a Supabase</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="openai-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">API de OpenAI</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="auth-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">Sistema de autenticación</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="eco-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">Creación de ecos</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="eiven-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">IA Eiven</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="dashboard-status" class="w-4 h-4 bg-gray-300 rounded-full"></div>
+                    <span class="text-text-secondary">Dashboard</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <button 
+                    id="run-basic-tests" 
+                    class="bg-primary-blue text-white px-6 py-3 rounded-xl font-medium hover:bg-opacity-90 transition-colors"
+                >
+                    Ejecutar Pruebas Básicas
+                </button>
+                <button 
+                    id="run-flow-test" 
+                    class="bg-primary-lavender text-white px-6 py-3 rounded-xl font-medium hover:bg-opacity-90 transition-colors"
+                >
+                    Prueba de Flujo Completo
+                </button>
+                <button 
+                    id="clear-test-data" 
+                    class="bg-red-500 text-white px-6 py-3 rounded-xl font-medium hover:bg-red-600 transition-colors"
+                >
+                    Limpiar Datos de Prueba
+                </button>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div class="bg-soft-gray rounded-2xl p-8 border border-medium-gray mb-8">
+            <h3 class="text-xl font-display font-semibold text-text-primary mb-4">Resultados de Pruebas</h3>
+            <div id="test-results" class="bg-black text-green-400 font-mono text-sm p-4 rounded-lg min-h-96 overflow-y-auto">
+                <div class="text-primary-blue">Ecos Test Suite - Listo para ejecutar pruebas</div>
+                <div class="text-text-secondary">Usa los botones de arriba para iniciar las pruebas</div>
+            </div>
+        </div>
+
+        <!-- Manual Testing Section -->
+        <div class="bg-soft-gray rounded-2xl p-8 border border-medium-gray">
+            <h3 class="text-xl font-display font-semibold text-text-primary mb-6">Pruebas Manuales</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Authentication Test -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-text-primary">Test de Autenticación</h4>
+                    <div class="space-y-2">
+                        <button id="test-register" class="w-full bg-primary-lavender text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Probar Registro
+                        </button>
+                        <button id="test-login" class="w-full bg-primary-blue text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Probar Login
+                        </button>
+                        <button id="test-logout" class="w-full bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">
+                            Probar Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Eco Creation Test -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-text-primary">Test de Ecos</h4>
+                    <div class="space-y-2">
+                        <button id="test-create-eco" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">
+                            Crear Eco de Prueba
+                        </button>
+                        <button id="test-load-ecos" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                            Cargar Ecos
+                        </button>
+                        <button id="test-eiven-chat" class="w-full bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors">
+                            Probar Chat con Eiven
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="mt-8 pt-6 border-t border-medium-gray">
+                <h4 class="font-semibold text-text-primary mb-4">Enlaces de Navegación</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="index.html" class="block bg-white border border-medium-gray rounded-lg p-4 text-center hover:shadow-md transition-shadow">
+                        <div class="text-2xl mb-2">🏠</div>
+                        <div class="font-medium text-text-primary">Landing Page</div>
+                        <div class="text-text-secondary text-sm">Página principal</div>
+                    </a>
+                    <a href="views/auth.html" class="block bg-white border border-medium-gray rounded-lg p-4 text-center hover:shadow-md transition-shadow">
+                        <div class="text-2xl mb-2">🔐</div>
+                        <div class="font-medium text-text-primary">Autenticación</div>
+                        <div class="text-text-secondary text-sm">Login/Registro</div>
+                    </a>
+                    <a href="views/dashboard.html" class="block bg-white border border-medium-gray rounded-lg p-4 text-center hover:shadow-md transition-shadow">
+                        <div class="text-2xl mb-2">📊</div>
+                        <div class="font-medium text-text-primary">Dashboard</div>
+                        <div class="text-text-secondary text-sm">Panel principal</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/eiven.js"></script>
+
+    <script>
+        // Test Suite Implementation
+        class EcosTestSuite {
+            constructor() {
+                this.testResults = [];
+                this.setupEventListeners();
+                this.logToResults('🚀 Test Suite initialized', 'info');
+            }
+
+            setupEventListeners() {
+                document.getElementById('run-basic-tests')?.addEventListener('click', () => this.runBasicTests());
+                document.getElementById('run-flow-test')?.addEventListener('click', () => this.runCompleteFlowTest());
+                document.getElementById('clear-test-data')?.addEventListener('click', () => this.clearTestData());
+
+                // Manual tests
+                document.getElementById('test-register')?.addEventListener('click', () => this.testRegistration());
+                document.getElementById('test-login')?.addEventListener('click', () => this.testLogin());
+                document.getElementById('test-logout')?.addEventListener('click', () => this.testLogout());
+                document.getElementById('test-create-eco')?.addEventListener('click', () => this.testCreateEco());
+                document.getElementById('test-load-ecos')?.addEventListener('click', () => this.testLoadEcos());
+                document.getElementById('test-eiven-chat')?.addEventListener('click', () => this.testEivenChat());
+            }
+
+            // =====================================================
+            // BASIC TESTS
+            // =====================================================
+
+            async runBasicTests() {
+                this.logToResults('🧪 Iniciando pruebas básicas...', 'info');
+                
+                await this.testSupabaseConnection();
+                await this.testOpenAIConnection();
+                await this.testDatabaseTables();
+                
+                this.logToResults('✅ Pruebas básicas completadas', 'success');
+            }
+
+            async testSupabaseConnection() {
+                this.logToResults('🔍 Probando conexión a Supabase...', 'test');
+                
+                try {
+                    const { data, error } = await supabase.from('profiles').select('count').limit(1);
+                    
+                    if (error && error.code !== 'PGRST116') {
+                        throw error;
+                    }
+                    
+                    this.setStatus('connection-status', true);
+                    this.logToResults('✅ Conexión a Supabase exitosa', 'success');
+                } catch (error) {
+                    this.setStatus('connection-status', false);
+                    this.logToResults(`❌ Error de conexión: ${error.message}`, 'error');
+                }
+            }
+
+            async testOpenAIConnection() {
+                this.logToResults('🤖 Probando API de OpenAI...', 'test');
+                
+                try {
+                    const response = await fetch('https://api.openai.com/v1/models', {
+                        headers: { 'Authorization': `Bearer ${OPENAI_CONFIG.apiKey}` }
+                    });
+                    
+                    if (response.ok) {
+                        this.setStatus('openai-status', true);
+                        this.logToResults('✅ API de OpenAI conectada', 'success');
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    this.setStatus('openai-status', false);
+                    this.logToResults(`❌ Error en OpenAI: ${error.message}`, 'error');
+                }
+            }
+
+            async testDatabaseTables() {
+                this.logToResults('📋 Verificando tablas de base de datos...', 'test');
+                
+                const requiredTables = ['profiles', 'gardens', 'echos', 'eiven_conversations'];
+                let tablesOK = 0;
+                
+                for (const table of requiredTables) {
+                    try {
+                        const { data, error } = await supabase.from(table).select('*').limit(1);
+                        if (!error || error.code === 'PGRST116') {
+                            tablesOK++;
+                            this.logToResults(`  ✓ Tabla '${table}' disponible`, 'info');
+                        } else {
+                            this.logToResults(`  ✗ Tabla '${table}' error: ${error.message}`, 'warning');
+                        }
+                    } catch (error) {
+                        this.logToResults(`  ✗ Tabla '${table}' error: ${error.message}`, 'error');
+                    }
+                }
+                
+                if (tablesOK === requiredTables.length) {
+                    this.logToResults(`✅ Todas las tablas (${tablesOK}/${requiredTables.length}) disponibles`, 'success');
+                } else {
+                    this.logToResults(`⚠️ Solo ${tablesOK}/${requiredTables.length} tablas disponibles`, 'warning');
+                }
+            }
+
+            // =====================================================
+            // FLOW TESTS
+            // =====================================================
+
+            async runCompleteFlowTest() {
+                this.logToResults('🚀 Iniciando prueba de flujo completo...', 'info');
+                
+                try {
+                    await this.testRegistration();
+                    await this.delay(1000);
+                    await this.testCreateEco();
+                    await this.delay(1000);
+                    await this.testEivenChat();
+                    
+                    this.logToResults('🎉 Flujo completo exitoso!', 'success');
+                } catch (error) {
+                    this.logToResults(`❌ Error en flujo: ${error.message}`, 'error');
+                }
+            }
+
+            async testRegistration() {
+                this.logToResults('👤 Probando registro de usuario...', 'test');
+                
+                const testEmail = `test_${Date.now()}@ecos-test.com`;
+                const testPassword = 'test123456';
+                
+                try {
+                    const result = await ecosAuth.signUp(testEmail, testPassword, {
+                        fullName: 'Usuario de Prueba'
+                    });
+                    
+                    if (result.success) {
+                        this.setStatus('auth-status', true);
+                        this.logToResults(`✅ Registro exitoso: ${testEmail}`, 'success');
+                        
+                        // Store test credentials for cleanup
+                        localStorage.setItem('test_user_email', testEmail);
+                        
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.setStatus('auth-status', false);
+                    this.logToResults(`❌ Error en registro: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            async testLogin() {
+                this.logToResults('🔐 Probando inicio de sesión...', 'test');
+                
+                const testEmail = localStorage.getItem('test_user_email') || 'demo@ecos.com';
+                const testPassword = 'test123456';
+                
+                try {
+                    const result = await ecosAuth.signIn(testEmail, testPassword);
+                    
+                    if (result.success) {
+                        this.setStatus('auth-status', true);
+                        this.logToResults(`✅ Login exitoso: ${testEmail}`, 'success');
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.setStatus('auth-status', false);
+                    this.logToResults(`❌ Error en login: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            async testLogout() {
+                this.logToResults('🚪 Probando cierre de sesión...', 'test');
+                
+                try {
+                    const result = await ecosAuth.signOut();
+                    
+                    if (result.success) {
+                        this.logToResults('✅ Logout exitoso', 'success');
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.logToResults(`❌ Error en logout: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            async testCreateEco() {
+                this.logToResults('🌱 Probando creación de eco...', 'test');
+                
+                if (!ecosAuth.isAuthenticated()) {
+                    this.logToResults('⚠️ Usuario no autenticado, saltando prueba', 'warning');
+                    return;
+                }
+                
+                try {
+                    // Get user gardens first
+                    const gardensResult = await ecosAPI.getGardens();
+                    
+                    if (!gardensResult.success || gardensResult.gardens.length === 0) {
+                        this.logToResults('⚠️ No hay jardines disponibles', 'warning');
+                        return;
+                    }
+                    
+                    const testEco = {
+                        content: `Este es un eco de prueba creado el ${new Date().toLocaleString()}`,
+                        mood: 'reflexivo',
+                        gardenId: gardensResult.gardens[0].id,
+                        isPublic: false
+                    };
+                    
+                    const result = await ecosAPI.createEcho(testEco);
+                    
+                    if (result.success) {
+                        this.setStatus('eco-status', true);
+                        this.logToResults('✅ Eco creado exitosamente', 'success');
+                        
+                        // Store for cleanup
+                        localStorage.setItem('test_eco_id', result.eco.id);
+                        
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.setStatus('eco-status', false);
+                    this.logToResults(`❌ Error creando eco: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            async testLoadEcos() {
+                this.logToResults('📚 Probando carga de ecos...', 'test');
+                
+                if (!ecosAuth.isAuthenticated()) {
+                    this.logToResults('⚠️ Usuario no autenticado, saltando prueba', 'warning');
+                    return;
+                }
+                
+                try {
+                    const result = await ecosAPI.getEchos({
+                        userId: ecosAuth.getCurrentUserId(),
+                        limit: 5
+                    });
+                    
+                    if (result.success) {
+                        this.setStatus('dashboard-status', true);
+                        this.logToResults(`✅ Cargados ${result.echos.length} ecos`, 'success');
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.setStatus('dashboard-status', false);
+                    this.logToResults(`❌ Error cargando ecos: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            async testEivenChat() {
+                this.logToResults('💙 Probando chat con Eiven...', 'test');
+                
+                try {
+                    const testMessage = "Hola Eiven, esto es una prueba de conexión.";
+                    
+                    const result = await eiven.sendMessage(testMessage);
+                    
+                    if (result.success) {
+                        this.setStatus('eiven-status', true);
+                        this.logToResults('✅ Eiven respondió correctamente', 'success');
+                        this.logToResults(`   Respuesta: ${result.message.content.substring(0, 100)}...`, 'info');
+                        return result;
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } catch (error) {
+                    this.setStatus('eiven-status', false);
+                    this.logToResults(`❌ Error en chat con Eiven: ${error.message}`, 'error');
+                    throw error;
+                }
+            }
+
+            // =====================================================
+            // UTILITY METHODS
+            // =====================================================
+
+            async clearTestData() {
+                this.logToResults('🧹 Limpiando datos de prueba...', 'info');
+                
+                try {
+                    const testUserId = ecosAuth.getCurrentUserId();
+                    const testEcoId = localStorage.getItem('test_eco_id');
+                    
+                    if (testEcoId) {
+                        await ecosAPI.deleteEcho(testEcoId);
+                        localStorage.removeItem('test_eco_id');
+                        this.logToResults('✅ Eco de prueba eliminado', 'success');
+                    }
+                    
+                    localStorage.removeItem('test_user_email');
+                    this.logToResults('✅ Datos de prueba limpiados', 'success');
+                    
+                } catch (error) {
+                    this.logToResults(`⚠️ Error limpiando datos: ${error.message}`, 'warning');
+                }
+            }
+
+            setStatus(elementId, success) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.className = `w-4 h-4 rounded-full ${success ? 'bg-green-500' : 'bg-red-500'}`;
+                }
+            }
+
+            logToResults(message, type = 'info') {
+                const container = document.getElementById('test-results');
+                if (!container) return;
+                
+                const timestamp = new Date().toLocaleTimeString();
+                const colors = {
+                    'info': 'text-blue-400',
+                    'success': 'text-green-400',
+                    'error': 'text-red-400',
+                    'warning': 'text-yellow-400',
+                    'test': 'text-purple-400'
+                };
+                
+                const div = document.createElement('div');
+                div.className = colors[type] || 'text-gray-400';
+                div.innerHTML = `[${timestamp}] ${message}`;
+                
+                container.appendChild(div);
+                container.scrollTop = container.scrollHeight;
+                
+                console.log(`[ECOS-TEST] ${message}`);
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize test suite
+        document.addEventListener('DOMContentLoaded', () => {
+            window.testSuite = new EcosTestSuite();
+        });
+    </script>
+</body>
+</html>

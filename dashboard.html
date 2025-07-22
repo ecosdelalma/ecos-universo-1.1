@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ecos</title>
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#a2c1ff',
+                        'primary-lavender': '#c5b8f0',
+                        'soft-gray': '#f8fafc',
+                        'medium-gray': '#e2e8f0',
+                        'dark-gray': '#64748b',
+                        'text-primary': '#1e293b',
+                        'text-secondary': '#64748b'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'Poppins', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white min-h-screen font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-medium-gray sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-display font-semibold text-text-primary">Ecos</h1>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#dashboard" class="text-text-primary font-medium border-b-2 border-primary-blue pb-1">Dashboard</a>
+                        <a href="#garden" class="text-text-secondary hover:text-text-primary transition-colors">Mi Jardín</a>
+                        <a href="#community" class="text-text-secondary hover:text-text-primary transition-colors">Comunidad</a>
+                        <a href="#eiven" class="text-text-secondary hover:text-text-primary transition-colors">Eiven</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="user-menu-button" class="flex items-center space-x-2 text-text-secondary hover:text-text-primary transition-colors">
+                            <div class="w-8 h-8 bg-primary-blue rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm font-medium">U</span>
+                            </div>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <!-- Welcome Section -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-display font-semibold text-text-primary mb-2">
+                Bienvenido de vuelta
+            </h2>
+            <p class="text-text-secondary text-lg">Todo comienza con un eco. ¿Qué resonará en ti hoy?</p>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-soft-gray rounded-2xl p-6 border border-medium-gray">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-primary-blue bg-opacity-20 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-2xl font-display font-semibold text-text-primary" id="total-ecos">0</p>
+                    <p class="text-text-secondary text-sm">Ecos creados</p>
+                </div>
+            </div>
+
+            <div class="bg-soft-gray rounded-2xl p-6 border border-medium-gray">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-primary-lavender bg-opacity-20 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-lavender" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-2xl font-display font-semibold text-text-primary" id="total-likes">0</p>
+                    <p class="text-text-secondary text-sm">Conexiones recibidas</p>
+                </div>
+            </div>
+
+            <div class="bg-soft-gray rounded-2xl p-6 border border-medium-gray">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-2xl font-display font-semibold text-text-primary" id="eiven-insights">0</p>
+                    <p class="text-text-secondary text-sm">Insights de Eiven</p>
+                </div>
+            </div>
+
+            <div class="bg-soft-gray rounded-2xl p-6 border border-medium-gray">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-2xl font-display font-semibold text-text-primary" id="this-month">0</p>
+                    <p class="text-text-secondary text-sm">Este mes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Create New Echo -->
+            <div class="lg:col-span-2 bg-soft-gray rounded-2xl p-8 border border-medium-gray">
+                <h3 class="text-xl font-display font-semibold text-text-primary mb-6">Crear un nuevo eco</h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <textarea
+                            id="echo-content"
+                            placeholder="¿Qué resuena en tu corazón hoy? Deja que tus pensamientos fluyan..."
+                            class="w-full p-4 border border-medium-gray rounded-xl focus:ring-2 focus:ring-primary-blue focus:border-transparent resize-none bg-white text-text-primary placeholder-text-secondary"
+                            rows="6"
+                        ></textarea>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-4">
+                        <select id="echo-mood" class="px-4 py-2 border border-medium-gray rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-transparent bg-white text-text-primary">
+                            <option value="">¿Cómo te sientes?</option>
+                            <option value="alegre">😊 Alegre</option>
+                            <option value="reflexivo">🤔 Reflexivo</option>
+                            <option value="melancólico">😌 Melancólico</option>
+                            <option value="esperanzado">🌟 Esperanzado</option>
+                            <option value="ansioso">😰 Ansioso</option>
+                            <option value="sereno">🧘 Sereno</option>
+                            <option value="energético">⚡ Energético</option>
+                            <option value="contemplativo">🌙 Contemplativo</option>
+                        </select>
+                        
+                        <label class="flex items-center space-x-2 text-text-secondary">
+                            <input type="checkbox" id="echo-public" class="rounded border-medium-gray focus:ring-primary-blue">
+                            <span class="text-sm">Compartir con la comunidad</span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button 
+                            id="create-echo-btn"
+                            class="bg-primary-blue text-white px-8 py-3 rounded-xl font-medium hover:bg-opacity-90 transition-all duration-200 hover:scale-105"
+                        >
+                            Crear eco
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eiven Sidebar -->
+            <div class="bg-soft-gray rounded-2xl p-6 border border-medium-gray">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-12 h-12 bg-primary-lavender rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl">💙</span>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-semibold text-text-primary">Eiven</h3>
+                        <p class="text-text-secondary text-sm">Tu compañía empática</p>
+                    </div>
+                </div>
+
+                <div id="eiven-insights-container" class="space-y-4 mb-6">
+                    <div class="text-center text-text-secondary py-8">
+                        <div class="text-4xl mb-3">💙</div>
+                        <p class="text-sm">No hay nuevos insights</p>
+                        <p class="text-xs mt-1">Eiven está esperando escucharte</p>
+                    </div>
+                </div>
+
+                <button 
+                    id="chat-eiven-btn"
+                    class="w-full bg-primary-lavender text-white py-3 rounded-xl font-medium hover:bg-opacity-90 transition-all duration-200"
+                >
+                    Conversar con Eiven
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Ecos -->
+        <div class="mt-12">
+            <h3 class="text-xl font-display font-semibold text-text-primary mb-6">Tus ecos recientes</h3>
+            
+            <div id="recent-ecos-container" class="space-y-4">
+                <!-- Ecos will be loaded here -->
+                <div class="text-center text-text-secondary py-12">
+                    <div class="text-4xl mb-4">🌱</div>
+                    <p class="text-lg mb-2">Aún no has creado ningún eco</p>
+                    <p class="text-sm">Todo comienza con un eco. Comparte tu primer pensamiento arriba.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Eiven Chat Modal -->
+    <div id="eiven-modal" class="fixed inset-0 bg-black bg-opacity-30 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl h-3/4 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <div class="p-6 border-b border-medium-gray flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary-lavender rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl">💙</span>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-semibold text-text-primary">Eiven</h3>
+                        <p class="text-text-secondary text-sm">Presente para escucharte</p>
+                    </div>
+                </div>
+                <button id="close-eiven-modal" class="text-text-secondary hover:text-text-primary transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div id="eiven-messages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Messages will be added here -->
+            </div>
+
+            <!-- Input -->
+            <div class="p-6 border-t border-medium-gray">
+                <div class="flex space-x-3">
+                    <input
+                        type="text"
+                        id="eiven-input"
+                        placeholder="Comparte lo que sientes en tu corazón..."
+                        class="flex-1 px-4 py-3 border border-medium-gray rounded-xl focus:ring-2 focus:ring-primary-lavender focus:border-transparent bg-white text-text-primary placeholder-text-secondary"
+                    />
+                    <button 
+                        id="send-eiven-message"
+                        class="bg-primary-lavender text-white px-6 py-3 rounded-xl font-medium hover:bg-opacity-90 transition-colors"
+                    >
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/eiven.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

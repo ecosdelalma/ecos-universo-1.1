@@ -1,0 +1,308 @@
+/* Ecos Platform - Custom Styles */
+
+/* Animations */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+}
+
+/* Ocean Animation */
+.ocean-container {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+}
+
+.ocean {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+}
+
+.wave {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1MDAiIHZpZXdCb3g9IjAgMCAxNDQwIDUwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgNDY5TDQwIDQ1Ny4zQzgwIDQ0NS43IDEyMCA0MjIuMyAyMDAgNDEzQzI4MCA0MDMuNyAzNjAgNDA4LjMgNDQwIDQwNS4zQzUyMCA0MDIuMyA2MDAgMzkxLjcgNjgwIDM4MS43Qzc2MCAzNzEuNyA4NzAgMzYyLjMgOTIwIDM1N0M5NzAgMzUxLjcgMTAyMCAzNTEuNyAxMDcwIDM1MUMxMTIwIDM1MC4zIDExNzAgMzM5LjcgMTIyMCAzMzVDMTI3MCAzMzAuMyAxMzIwIDMzMS43IDEzNjAgMzMyLjNMMTQwMCAzMzNWNTAwSDBWNDY5WiIgZmlsbD0iIzNiODJmNiIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPC9zdmc+);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    animation: wave-animation 10s linear infinite;
+    transform: translate3d(0, 0, 0);
+}
+
+.wave:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1MDAiIHZpZXdCb3g9IjAgMCAxNDQwIDUwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgNDY5TDQwIDQ1Ny4zQzgwIDQ0NS43IDEyMCA0MjIuMyAyMDAgNDEzQzI4MCA0MDMuNyAzNjAgNDA4LjMgNDQwIDQwNS4zQzUyMCA0MDIuMyA2MDAgMzkxLjcgNjgwIDM4MS43Qzc2MCAzNzEuNyA4NzAgMzYyLjMgOTIwIDM1N0M5NzAgMzUxLjcgMTAyMCAzNTEuNyAxMDcwIDM1MUMxMTIwIDM1MC4zIDExNzAgMzM5LjcgMTIyMCAzMzVDMTI3MCAzMzAuMyAxMzIwIDMzMS43IDEzNjAgMzMyLjNMMTQwMCAzMzNWNTAwSDBWNDY5WiIgZmlsbD0iIzFkNGVkOCIgZmlsbC1vcGFjaXR5PSIwLjUiLz4KPC9zdmc+);
+    animation: wave-animation 7s linear infinite reverse;
+}
+
+.wave:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1MDAiIHZpZXdCb3g9IjAgMCAxNDQwIDUwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgNDY5TDQwIDQ1Ny4zQzgwIDQ0NS43IDEyMCA0MjIuMyAyMDAgNDEzQzI4MCA0MDMuNyAzNjAgNDA4LjMgNDQwIDQwNS4zQzUyMCA0MDIuMyA2MDAgMzkxLjcgNjgwIDM4MS43Qzc2MCAzNzEuNyA4NzAgMzYyLjMgOTIwIDM1N0M5NzAgMzUxLjcgMTAyMCAzNTEuNyAxMDcwIDM1MUMxMTIwIDM1MC4zIDExNzAgMzM5LjcgMTIyMCAzMzVDMTI3MCAzMzAuMyAxMzIwIDMzMS43IDEzNjAgMzMyLjNMMTQwMCAzMzNWNTAwSDBWNDY5WiIgZmlsbD0iIzFmMmM3NCIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPC9zdmc+);
+    animation: wave-animation 13s linear infinite;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: translateX(0px) translateZ(0px) scaleY(1);
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0px) scaleY(0.8);
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0px) scaleY(1);
+    }
+}
+
+/* Eiven Avatar Animation */
+.eiven-avatar {
+    animation: float 6s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1e40af;
+}
+
+/* Navigation Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Modal Animations */
+.modal-enter {
+    animation: modal-fade-in 0.3s ease-out;
+}
+
+.modal-exit {
+    animation: modal-fade-out 0.3s ease-in;
+}
+
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes modal-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Button Hover Effects */
+.btn-float {
+    transition: all 0.3s ease;
+}
+
+.btn-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading Screen */
+#loading-screen {
+    transition: opacity 0.5s ease-out;
+}
+
+/* Navigation Links Active State */
+.nav-link.active {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wave {
+        height: 50px;
+    }
+    
+    .wave:before,
+    .wave:after {
+        height: 50px;
+    }
+    
+    .eiven-avatar {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Garden and Eco Styles */
+.eco-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.eco-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography */
+.text-balance {
+    text-wrap: balance;
+}
+
+/* Focus States */
+input:focus,
+textarea:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+/* Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Gradient Backgrounds */
+.bg-nature-gradient {
+    background: linear-gradient(135deg, #065f46 0%, #10b981 50%, #3b82f6 100%);
+}
+
+.bg-sunset-gradient {
+    background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #fbbf24 100%);
+}
+
+/* Chat Interface Styles */
+.chat-bubble {
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.chat-bubble.user {
+    background: #3b82f6;
+    color: white;
+    margin-left: auto;
+    border-radius: 18px 18px 4px 18px;
+}
+
+.chat-bubble.eiven {
+    background: #f3f4f6;
+    color: #374151;
+    margin-right: auto;
+    border-radius: 18px 18px 18px 4px;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f3f4f6;
+    border-radius: 18px;
+    margin: 8px 0;
+    max-width: 80px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9ca3af;
+    margin: 0 2px;
+    animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Dashboard Styles */
+.dashboard-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

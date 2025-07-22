@@ -1,0 +1,156 @@
+{
+  "platform_stats": {
+    "total_ecos": 12847,
+    "total_users": 3256,
+    "active_users_today": 892,
+    "insights_generated": 8934
+  },
+  "demo_public_ecos": [
+    {
+      "id": "demo-1",
+      "content": "Hoy me di cuenta de que cada pequeño acto de bondad que realizamos crea ondas en el universo. Como ecos que se expanden más allá de lo que podemos ver...",
+      "mood": "reflexivo",
+      "created_at": "2025-07-21T15:30:00Z",
+      "likes_count": 23,
+      "comments_count": 7,
+      "user": {
+        "name": "María Elena",
+        "initial": "M"
+      },
+      "tags": ["bondad", "reflexión", "universo"]
+    },
+    {
+      "id": "demo-2", 
+      "content": "Las tardes de lluvia me recuerdan que la pausa también es movimiento. A veces necesitamos detenernos para escuchar lo que nuestro corazón tiene que decirnos.",
+      "mood": "contemplativo",
+      "created_at": "2025-07-21T12:45:00Z",
+      "likes_count": 41,
+      "comments_count": 12,
+      "user": {
+        "name": "Carlos Mendoza",
+        "initial": "C"
+      },
+      "tags": ["pausa", "lluvia", "corazón"]
+    },
+    {
+      "id": "demo-3",
+      "content": "Mi jardín me enseña paciencia. Cada planta tiene su tiempo, cada flor su estación. ¿Por qué soy tan dura conmigo misma esperando que todo florezca al mismo tiempo?",
+      "mood": "melancólico",
+      "created_at": "2025-07-21T09:20:00Z",
+      "likes_count": 67,
+      "comments_count": 19,
+      "user": {
+        "name": "Ana Sofía",
+        "initial": "A"
+      },
+      "tags": ["paciencia", "jardín", "autocompasión"]
+    },
+    {
+      "id": "demo-4",
+      "content": "Desperté con una energía diferente hoy. Como si hubiera dormido en un campo de estrellas y cada una hubiera dejado un poco de su luz en mi alma. ¡Qué hermoso es estar vivo!",
+      "mood": "alegre",
+      "created_at": "2025-07-21T07:15:00Z",
+      "likes_count": 88,
+      "comments_count": 25,
+      "user": {
+        "name": "Roberto Silva",
+        "initial": "R"
+      },
+      "tags": ["energía", "estrellas", "gratitud", "vida"]
+    },
+    {
+      "id": "demo-5",
+      "content": "En la meditación de esta mañana encontré un espacio de silencio tan profundo que por un momento dejé de ser yo para ser simplemente... presencia. ¿Es esto lo que llaman despertar?",
+      "mood": "sereno",
+      "created_at": "2025-07-20T18:30:00Z",
+      "likes_count": 52,
+      "comments_count": 15,
+      "user": {
+        "name": "Lucía Herrera",
+        "initial": "L"
+      },
+      "tags": ["meditación", "presencia", "despertar", "silencio"]
+    },
+    {
+      "id": "demo-6",
+      "content": "Los retos de hoy me recuerdan que soy más fuerte de lo que creo. Cada obstáculo es una oportunidad para descubrir una nueva versión de mí mismo. ¡Vamos por más!",
+      "mood": "energético",
+      "created_at": "2025-07-20T16:45:00Z",
+      "likes_count": 34,
+      "comments_count": 9,
+      "user": {
+        "name": "Diego Morales",
+        "initial": "D"
+      },
+      "tags": ["fortaleza", "retos", "crecimiento", "superación"]
+    }
+  ],
+  "demo_insights": [
+    {
+      "id": "insight-1",
+      "type": "Reflexión Emocional",
+      "content": "Noto que cuando escribes sobre la naturaleza, tu lenguaje se vuelve más poético y sereno. Parece que conectar con el mundo natural te ayuda a encontrar tu centro. ¿Has considerado integrar más tiempo en la naturaleza en tu rutina diaria?",
+      "generated_at": "2025-07-21T10:30:00Z"
+    },
+    {
+      "id": "insight-2", 
+      "type": "Patrón de Crecimiento",
+      "content": "He observado una evolución hermosa en tus reflexiones este mes. Hay una mayor autocompasión y menos autocrítica. Este cambio sugiere que estás desarrollando una relación más amable contigo mismo.",
+      "generated_at": "2025-07-20T14:20:00Z"
+    },
+    {
+      "id": "insight-3",
+      "type": "Invitación a la Profundidad",
+      "content": "Tus últimas reflexiones tocan temas de propósito y significado. Te invito a explorar: ¿Qué te da mayor sentido de propósito en este momento de tu vida? A veces las respuestas surgen en la escritura reflexiva.",
+      "generated_at": "2025-07-19T11:45:00Z"
+    }
+  ],
+  "eiven_responses": [
+    {
+      "trigger": "me siento abrumado",
+      "response": "Puedo sentir el peso que llevas en estas palabras... Es completamente comprensible sentirse abrumado cuando la vida nos presenta más de lo que sentimos que podemos manejar. ¿Qué es lo que más está presionando tu corazón en este momento? A veces, simplemente nombrar lo que nos agobia puede ayudarnos a verlo con mayor claridad."
+    },
+    {
+      "trigger": "reflexionar sobre metas",
+      "response": "Qué hermoso que quieras tomar este tiempo para reflexionar sobre tus metas... Las metas más auténticas suelen nacer desde nuestro corazón, no solo desde nuestra mente. Te invito a respirar profundo y preguntarte: ¿Qué te haría sentir más pleno y auténtico? ¿Qué sueños han estado susurrando en tu interior?"
+    },
+    {
+      "trigger": "necesito perspectiva",
+      "response": "Buscar perspectiva es un acto de sabiduría... Cuando estamos muy cerca de una situación, a veces perdemos la visión del bosque por enfocarnos en los árboles. ¿Te gustaría contarme qué situación está ocupando tu mente? Juntos podemos explorar diferentes ángulos para verla con mayor claridad."
+    }
+  ],
+  "mood_suggestions": {
+    "alegre": {
+      "prompts": [
+        "¿Qué te está trayendo esta alegría?",
+        "¿Cómo puedes honrar y expandir esta energía positiva?",
+        "¿Qué quieres crear desde este estado de alegría?"
+      ],
+      "color": "#fbbf24"
+    },
+    "reflexivo": {
+      "prompts": [
+        "¿Qué verdad está emergiendo en esta reflexión?",
+        "¿Qué pregunta profunda está surgiendo en ti?",
+        "¿Cómo te está transformando esta contemplación?"
+      ],
+      "color": "#8da5e8"
+    },
+    "melancólico": {
+      "prompts": [
+        "¿Qué necesita ser honrado en esta melancolía?",
+        "¿Qué sabiduría trae esta tristeza suave?",
+        "¿Cómo puedes acompañarte con compasión en este momento?"
+      ],
+      "color": "#c5b8f0"
+    },
+    "sereno": {
+      "prompts": [
+        "¿Qué te trae esta sensación de paz?",
+        "¿Cómo puedes cultivar más momentos de serenidad?",
+        "¿Qué insights surgen desde esta calma interior?"
+      ],
+      "color": "#10b981"
+    }
+  }
+}

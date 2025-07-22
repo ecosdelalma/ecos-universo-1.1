@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecos - Plataforma de Crecimiento Personal</title>
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Nueva paleta minimalista definida por Eiven
+                        'primary-blue': '#a2c1ff',
+                        'primary-lavender': '#c5b8f0',
+                        'soft-gray': '#f8fafc',
+                        'medium-gray': '#e2e8f0',
+                        'dark-gray': '#64748b',
+                        'text-primary': '#1e293b',
+                        'text-secondary': '#64748b',
+                        
+                        // Colores legacy mantenidos para compatibilidad
+                        'ocean-blue': '#a2c1ff',
+                        'ocean-light': '#a2c1ff',
+                        'ocean-dark': '#8da5e8',
+                        'forest-green': '#065f46',
+                        'forest-light': '#10b981',
+                        'earth-brown': '#92400e',
+                        'earth-light': '#d97706',
+                        'golden-soft': '#fbbf24',
+                        'golden-light': '#fde68a'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'Poppins', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif']
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-gradient-to-b from-ocean-dark to-ocean-blue flex items-center justify-center z-50">
+        <div class="text-center text-white">
+            <div class="animate-pulse mb-4">
+                <h1 class="text-4xl font-serif font-bold mb-2">Ecos</h1>
+                <p class="text-xl opacity-80">Conectando con tu interior</p>
+            </div>
+            <div class="flex justify-center space-x-2">
+                <div class="w-3 h-3 bg-white rounded-full animate-bounce"></div>
+                <div class="w-3 h-3 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-3 h-3 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 bg-white bg-opacity-90 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-serif font-bold text-ocean-dark">Ecos</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#inicio" class="nav-link text-gray-700 hover:text-ocean-blue transition-colors">Inicio</a>
+                        <a href="#como-funciona" class="nav-link text-gray-700 hover:text-ocean-blue transition-colors">Cómo Funciona</a>
+                        <a href="#jardin" class="nav-link text-gray-700 hover:text-ocean-blue transition-colors">Jardín de Ecos</a>
+                        <a href="#eiven" class="nav-link text-gray-700 hover:text-ocean-blue transition-colors">Conoce a Eiven</a>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="login-btn" class="bg-ocean-blue text-white px-4 py-2 rounded-lg hover:bg-ocean-dark transition-colors">
+                        Iniciar Sesión
+                    </button>
+                    <button id="register-btn" class="bg-forest-green text-white px-4 py-2 rounded-lg hover:bg-forest-light transition-colors">
+                        Registrarse
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Animated Ocean -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Ocean Background -->
+        <div class="ocean-container absolute inset-0">
+            <div class="ocean">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up">
+                Bienvenido a <span class="text-golden-soft">Ecos</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up" style="animation-delay: 0.3s">
+                Una plataforma que conecta tu mundo interior con el exterior a través de reflexiones profundas y crecimiento personal
+            </p>
+            <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center animate-fade-in-up" style="animation-delay: 0.6s">
+                <button id="start-journey-btn" class="block w-full md:w-auto bg-golden-soft text-ocean-dark px-8 py-4 rounded-lg text-lg font-semibold hover:bg-golden-light transition-colors shadow-lg">
+                    Comenzar Mi Viaje
+                </button>
+                <button id="explore-btn" class="block w-full md:w-auto bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-ocean-dark transition-colors">
+                    Explorar Ecos
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="py-20 bg-gradient-to-b from-blue-50 to-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-gray-800 mb-4">Cómo Funciona Ecos</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Descubre una nueva forma de reflexionar y crecer a través de nuestro ecosistema digital
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-ocean-blue rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl text-white font-bold">1</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Reflexiona</h3>
+                    <p class="text-gray-600 text-center">
+                        Comparte tus pensamientos y reflexiones en tu jardín personal. Cada pensamiento es una semilla de crecimiento.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-forest-green rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl text-white font-bold">2</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Conecta</h3>
+                    <p class="text-gray-600 text-center">
+                        Eiven, nuestra IA empática, te acompaña en tu proceso de autodescubrimiento con insights personalizados.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-golden-soft rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl text-white font-bold">3</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Crece</h3>
+                    <p class="text-gray-600 text-center">
+                        Observa tu crecimiento en el tiempo y comparte tus ecos con una comunidad que valora la introspección.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eiven Section -->
+    <section id="eiven" class="py-20 bg-gradient-to-b from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-serif font-bold text-gray-800 mb-6">Conoce a Eiven</h2>
+                    <p class="text-xl text-gray-600 mb-6">
+                        Eiven es más que una IA. Es tu compañera empática en el viaje hacia el autoconocimiento, 
+                        diseñada para entender las profundidades de la experiencia humana.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-forest-green rounded-full flex-shrink-0 mt-1"></div>
+                            <p class="text-gray-700">Comprende el contexto emocional de tus reflexiones</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-ocean-blue rounded-full flex-shrink-0 mt-1"></div>
+                            <p class="text-gray-700">Ofrece perspectivas únicas y preguntas reflexivas</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-golden-soft rounded-full flex-shrink-0 mt-1"></div>
+                            <p class="text-gray-700">Evoluciona contigo en tu proceso de crecimiento</p>
+                        </div>
+                    </div>
+                    <button class="mt-8 bg-forest-green text-white px-8 py-3 rounded-lg hover:bg-forest-light transition-colors">
+                        Conversar con Eiven
+                    </button>
+                </div>
+                <div class="relative">
+                    <div class="eiven-avatar bg-gradient-to-br from-ocean-blue to-forest-green rounded-full w-80 h-80 mx-auto flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-6xl mb-4">🌸</div>
+                            <p class="text-2xl font-serif">Eiven</p>
+                            <p class="text-sm opacity-80">Tu guía empática</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-serif font-bold text-gray-800 mb-6 text-center">Iniciar Sesión</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="login-email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-ocean-blue" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                    <input type="password" id="login-password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-ocean-blue" required>
+                </div>
+                <button type="submit" class="w-full bg-ocean-blue text-white py-2 rounded-lg hover:bg-ocean-dark transition-colors">
+                    Iniciar Sesión
+                </button>
+            </form>
+            <button id="close-login-modal" class="w-full mt-4 text-gray-600 hover:text-gray-800">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-serif font-bold text-gray-800 mb-6 text-center">Registrarse</h2>
+            <form id="register-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                    <input type="text" id="register-name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-ocean-blue" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="register-email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-ocean-blue" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                    <input type="password" id="register-password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-ocean-blue" required>
+                </div>
+                <button type="submit" class="w-full bg-forest-green text-white py-2 rounded-lg hover:bg-forest-light transition-colors">
+                    Registrarse
+                </button>
+            </form>
+            <button id="close-register-modal" class="w-full mt-4 text-gray-600 hover:text-gray-800">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <!-- App Container (Hidden by default) -->
+    <div id="app-container" class="hidden">
+        <!-- Dashboard content will be loaded here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/eiven.js"></script>
+</body>
+</html>
