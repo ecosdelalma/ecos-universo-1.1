@@ -1,0 +1,21 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bg:#05060a;--fg:#e6e9ef;--glow:120,180,255;--font-ecos:'EcosVideoFont',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,'Apple Color Emoji','Segoe UI Emoji';}
+html,body{background:#05060a;color:var(--fg);}
+*{font-family:var(--font-ecos);}
+a{color:inherit;text-decoration:none;}
+.container{max-width:1100px;margin:0 auto;padding:1rem;}
+.card{@apply rounded-2xl p-6 shadow-xl border border-white/10 bg-white/5 backdrop-blur;}
+.btn{@apply px-4 py-2 rounded-xl border border-white/20 hover:border-white/40 transition;}
+.btn-primary{@apply btn;}
+.ecos-glow{box-shadow:0 0 80px rgba(var(--glow),.07), inset 0 0 40px rgba(255,255,255,.03);}
+.ecos-btn{@apply px-5 py-2.5 rounded-2xl border border-white/30;}
+.ecos-primary{@apply ecos-btn;}
+.ecos-ghost{@apply ecos-btn;}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 30%, rgba(255,255,255,.12), rgba(0,0,0,.55) 60%, rgba(0,0,0,.7));}
+@keyframes floaty{0%{transform:translateY(0) translateX(0);opacity:.2}50%{transform:translateY(-10px) translateX(5px);opacity:.5}100%{transform:translateY(0) translateX(0);opacity:.2}}
+.speck{position:absolute;width:2px;height:2px;background:rgba(255,255,255,.7);border-radius:9999px;animation:floaty 6s ease-in-out infinite}
+@font-face{font-family:'EcosVideoFont';src:url('/fonts/ecos.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
